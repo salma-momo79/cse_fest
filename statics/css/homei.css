@@ -1,0 +1,65 @@
+body {
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .hero {
+    background: linear-gradient(to right, #1e90ff, #00bcd4);
+    color: white;
+    padding: 100px 0;
+  }
+  
+  .hero h1 {
+    font-weight: bold;
+  }
+  
+  .btn-primary {
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .btn-primary:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Cards */
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .progress {
+    height: 20px;
+  }
+  
+  footer {
+    font-size: 0.9rem;
+  }
+  
+  /* Dark mode */
+  .dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+  
+  .dark-mode .card {
+    background-color: #1e1e1e;
+    color: #fff;
+  }
+  
+  .dark-mode .navbar,
+  .dark-mode footer {
+    background-color: #000 !important;
+  }
+  
+  .dark-mode .btn-outline-primary {
+    border-color: #fff;
+    color: #fff;
+  }
+  

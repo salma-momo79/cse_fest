@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivational Movies</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Inspirational and Motivational Movies</h2>
+
+    <div id="movie-list" class="row">
+        {% for movie in movies %}
+            <div class="col-md-4 mb-4">
+                <div class="card movie-card">
+                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="card-img-top movie-img" alt="{{ movie.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ movie.title }}</h5>
+                        <p class="card-text">{{ movie.overview|slice:":150" }}...</p>
+                        <div class="movie-reviews">
+                            <p><strong>Rating:</strong> {{ movie.vote_average }}</p>
+                        </div>
+                        <a href="https://www.themoviedb.org/movie/{{ movie.id }}" target="_blank" class="btn btn-primary movie-btn">More Info</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

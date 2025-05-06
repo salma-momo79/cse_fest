@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Study Session</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #eef3f8;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+      max-width: 600px;
+      margin-top: 60px;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    #startBtn {
+      padding: 12px 25px;
+      font-size: 18px;
+    }
+
+    #meetingInfo {
+      margin-top: 20px;
+      display: none;
+      background: #f0fff4;
+      border-left: 5px solid #28a745;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    #copyBtn {
+      margin-top: 10px;
+    }
+
+    #countdown, #cooldownNotice {
+      font-weight: bold;
+      color: #dc3545;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container text-center">
+    <h2>📚 Start a Study Session</h2>
+    <button id="startBtn" class="btn btn-success">Start Session</button>
+
+    <div id="meetingInfo">
+      <p><strong>Meeting Link:</strong> <a href="#" id="meetingLink" target="_blank">Link</a></p>
+      <button id="copyBtn" class="btn btn-outline-secondary btn-sm">📋 Copy Link</button>
+      <p id="countdown">⏳ Time Left: 20:00</p>
+    </div>
+
+    <p id="cooldownNotice" style="display:none;">⛔ Please wait 2 hours before starting a new session.</p>
+  </div>
+
+  <script>
+    const startBtn = document.getElementById('startBtn');
+    const meetingInfo = document.getElementById('meetingInfo');
+    const meetingLink = document.getElementById('meetingLink');
+    const countdown = document.getElementById('countdown');
+    const copyBtn = document.getElementById('copyBtn');
+    const cooldownNotice = document.getElementById('cooldownNotice');
+
+    let sessionStartedAt = null;
+    let cooldownDuration = 2 * 60 * 60 * 1000; // 2 hours in ms
+    let sessionDuration = 20 * 60; // 20 minutes in seconds
+
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      return ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')};
+    }
+
+    function startCountdown(duration) {
+      let remaining = duration;
+      countdown.textContent = ⏳ Time Left: ${formatTime(remaining)};
+
+      const interval = setInterval(() => {
+        remaining--;
+        countdown.textContent = ⏳ Time Left: ${formatTime(remaining)};
+        if (remaining <= 0) {
+          clearInterval(interval);
+          countdown.textContent = "🛑 Session ended!";
+          meetingLink.href = "#";
+          meetingLink.innerText = "Session expired.";
+          meetingLink.style.pointerEvents = "none";
+        }
+      }, 1000);
+    }
+
+    startBtn.addEventListener('click', async () => {
+      const now = new Date().getTime();
+
+      if (sessionStartedAt && now - sessionStartedAt < cooldownDuration) {
+        cooldownNotice.style.display = 'block';
+        const waitMinutes = Math.ceil((cooldownDuration - (now - sessionStartedAt)) / (60 * 1000));
+        cooldownNotice.textContent = ⛔ Please wait ${waitMinutes} more minute(s) before starting a new session.;
+        return;
+      }
+
+      // Fake API link generation
+      const dummyLink = https://studyhub.com/session/${Math.floor(Math.random() * 1000000)};
+      meetingLink.href = dummyLink;
+      meetingLink.innerText = dummyLink;
+      meetingLink.style.pointerEvents = "auto";
+
+      sessionStartedAt = now;
+      meetingInfo.style.display = 'block';
+      cooldownNotice.style.display = 'none';
+      startCountdown(sessionDuration);
+    });
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(meetingLink.href).then(() => {
+        copyBtn.textContent = "✅ Copied!";
+        setTimeout(() => copyBtn.textContent = "📋 Copy Link", 1500);
+      });
+    });
+  </script>
+
+</body>
+</html>

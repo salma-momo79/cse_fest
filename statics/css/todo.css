@@ -1,0 +1,13 @@
+body {
+    background: #f2f6fc;
+    font-family: "Segoe UI", sans-serif;
+  }
+  
+  .card {
+    border-radius: 1rem;
+  }
+  
+  #course-list li {
+    border-radius: 0.5rem;
+  }
+  

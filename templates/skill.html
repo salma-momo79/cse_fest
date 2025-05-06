@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Skill Tree</title>
+</head>
+<body>
+  <h1>My Skill Tree</h1>
+  <script>
+    const skillData = {{ skills|safe }};
+  </script>
+
+  <div id="skill-tree"></div>
+
+  <script>
+    const container = document.getElementById('skill-tree');
+
+    skillData.forEach(skill => {
+      const node = document.createElement('div');
+      node.innerHTML = `<h3>${skill.name}</h3><p>${skill.description}</p>`;
+      node.style.border = '1px solid #ccc';
+      node.style.padding = '10px';
+      node.style.margin = '10px';
+      container.appendChild(node);
+    });
+  </script>
+</body>
+</html>
