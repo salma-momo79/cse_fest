@@ -48,16 +48,16 @@
 <body>
 
   <div class="container text-center">
-    <h2>📚 Start a Study Session</h2>
+    <h2> Start a Study Session</h2>
     <button id="startBtn" class="btn btn-success">Start Session</button>
 
     <div id="meetingInfo">
       <p><strong>Meeting Link:</strong> <a href="#" id="meetingLink" target="_blank">Link</a></p>
-      <button id="copyBtn" class="btn btn-outline-secondary btn-sm">📋 Copy Link</button>
-      <p id="countdown">⏳ Time Left: 20:00</p>
+      <button id="copyBtn" class="btn btn-outline-secondary btn-sm"> Copy Link</button>
+      <p id="countdown">Time Left: 20:00</p>
     </div>
 
-    <p id="cooldownNotice" style="display:none;">⛔ Please wait 2 hours before starting a new session.</p>
+    <p id="cooldownNotice" style="display:none;">Please wait 2 hours before starting a new session.</p>
   </div>
 
   <script>
@@ -69,8 +69,8 @@
     const cooldownNotice = document.getElementById('cooldownNotice');
 
     let sessionStartedAt = null;
-    let cooldownDuration = 2 * 60 * 60 * 1000; // 2 hours in ms
-    let sessionDuration = 20 * 60; // 20 minutes in seconds
+    let cooldownDuration = 2 * 60 * 60 * 1000; 
+    let sessionDuration = 20 * 60; 
 
     function formatTime(seconds) {
       const m = Math.floor(seconds / 60);
@@ -80,14 +80,14 @@
 
     function startCountdown(duration) {
       let remaining = duration;
-      countdown.textContent = ⏳ Time Left: ${formatTime(remaining)};
+      countdown.textContent =  Time Left: ${formatTime(remaining)};
 
       const interval = setInterval(() => {
         remaining--;
-        countdown.textContent = ⏳ Time Left: ${formatTime(remaining)};
+        countdown.textContent =  Time Left: ${formatTime(remaining)};
         if (remaining <= 0) {
           clearInterval(interval);
-          countdown.textContent = "🛑 Session ended!";
+          countdown.textContent = " Session ended!";
           meetingLink.href = "#";
           meetingLink.innerText = "Session expired.";
           meetingLink.style.pointerEvents = "none";
@@ -101,11 +101,10 @@
       if (sessionStartedAt && now - sessionStartedAt < cooldownDuration) {
         cooldownNotice.style.display = 'block';
         const waitMinutes = Math.ceil((cooldownDuration - (now - sessionStartedAt)) / (60 * 1000));
-        cooldownNotice.textContent = ⛔ Please wait ${waitMinutes} more minute(s) before starting a new session.;
+        cooldownNotice.textContent =  Please wait ${waitMinutes} more minute(s) before starting a new session.;
         return;
       }
 
-      // Fake API link generation
       const dummyLink = https://studyhub.com/session/${Math.floor(Math.random() * 1000000)};
       meetingLink.href = dummyLink;
       meetingLink.innerText = dummyLink;
@@ -119,8 +118,8 @@
 
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(meetingLink.href).then(() => {
-        copyBtn.textContent = "✅ Copied!";
-        setTimeout(() => copyBtn.textContent = "📋 Copy Link", 1500);
+        copyBtn.textContent = " Copied!";
+        setTimeout(() => copyBtn.textContent = " Copy Link", 1500);
       });
     });
   </script>

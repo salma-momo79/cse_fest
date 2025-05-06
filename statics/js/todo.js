@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const courseList = document.getElementById("course-list");
     const alertBox = document.getElementById("alert");
   
-    // Load saved courses
+
     const savedCourses = JSON.parse(localStorage.getItem("courses")) || [];
     savedCourses.forEach(course => addCourseToDOM(course));
   

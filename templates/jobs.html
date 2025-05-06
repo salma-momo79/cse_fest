@@ -13,7 +13,7 @@
 
   <div class="container">
     <div class="job-card text-center mt-5">
-      <h2 class="mb-4">💼 Job Offer</h2>
+      <h2 class="mb-4"> Job Offer</h2>
       <p>Apply for the job to win Shokhina's heart!</p>
 
       <div class="mb-3">
@@ -26,20 +26,19 @@
         <textarea class="form-control" id="feedback" rows="3" placeholder="Your thoughts..."></textarea>
       </div>
 
-      <button onclick="submitJobOffer()" class="btn btn-primary">Submit</button>
+      <button oclick="submitJobOffer()" class="btn btn-primary">Submit</button>
     </div>
   </div>
 
-  <!-- Modal -->
+  
   <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content text-center">
         <div class="modal-header">
-          <h5 class="modal-title w-100" id="resultModalLabel">🎉 Result</h5>
+          <h5 class="modal-title w-100" id="resultModalLabel"> Result</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="modalMessage" style="font-size: 1.4rem;">
-          <!-- Message will be inserted here -->
         </div>
         <div class="modal-footer justify-content-center">
           <button type="button" class="btn btn-success" data-bs-dismiss="modal">Okay!</button>
@@ -60,7 +59,6 @@
         return;
       }
 
-      // Step 1: Validate salary and store it
       fetch('/api/validate_salary/', {
         method: 'POST',
         headers: {
@@ -70,14 +68,12 @@
       })
       .then(response => response.json())
       .then(data => {
-        // Step 2: Show modal with result
         modalMessage.innerHTML = data.message;
         modalMessage.className = data.is_accepted ? "text-success" : "text-danger";
 
         const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
         resultModal.show();
 
-        // Step 3: If feedback was entered, submit it
         if (feedback.trim() !== "") {
           fetch('/api/submit_feedback/', {
             method: 'POST',

@@ -1,6 +1,5 @@
 body {
     background: #f2f6fc;
-    font-family: "Segoe UI", sans-serif;
   }
   
   .card {
@@ -8,6 +7,6 @@ body {
   }
   
   #course-list li {
-    border-radius: 0.5rem;
+    border-radius: 8px;
   }
   

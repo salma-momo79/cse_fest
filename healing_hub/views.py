@@ -11,7 +11,7 @@ from rest_framework.decorators import api_view
 class AddCourse(APIView):
     def post(self, request):
         course_name = request.data.get('name')
-        previous_cgpa = request.data.get('previous_cgpa')
+        previous_cgpa = request.data.get('prev_cgpa')
         if course_name and previous_cgpa:
             course = Course.objects.create(name=course_name, previous_cgpa=previous_cgpa)
             course.save()
@@ -30,11 +30,10 @@ class ValidateSalaryView(APIView):
         salary = request.data.get("salary")
 
         if salary == 70000:
-            return Response({"is_accepted": False, "message": "😠 bhaag beta abul"}, status=status.HTTP_200_OK)
+            return Response({"is_accepted": False, "message": " bhaag beta abul"}, status=status.HTTP_200_OK)
         else:
             job_offer = JobOffer.objects.create(salary=salary)
-            return Response({"is_accepted": True, "message": "💍 baba bolo, kobul"}, status=status.HTTP_200_OK)
-
+            return Response({"is_accepted": True, "message": " baba bolo, kobul"}, status=status.HTTP_200_OK)
 class SubmitFeedbackView(APIView):
     def post(self, request):
         salary = request.data.get("salary")
@@ -50,7 +49,7 @@ class SubmitFeedbackView(APIView):
 
 
 # TMDb API configurations
-API_KEY = '6964bb3ca2aaea2874667ab17571346a'
+API_KEY = ''
 BASE_URL = 'https://api.themoviedb.org/3'
 import requests
 def fetch_movies():
